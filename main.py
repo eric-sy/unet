@@ -1,6 +1,8 @@
 from model import *
 from data import *
+from itertools import tee
 import warnings
+from numpy.distutils.tests.test_fcompiler_nagfor import TestNagFCompilerVersions
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 #os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -32,15 +34,25 @@ if True:
     test_img = 'C:\\_ERIC\\_datasets\\dataset_v10.1\\left'
     test_predict = 'C:\\_ERIC\\_datasets\\dataset_v11\\left'
     model = load_model(model_path)
-    testGene = testGenerator(test_img,'.jpg')
-    testName = testFileName(test_img,'.jpg')
-    results = model.predict_generator(testGene,len(testName),verbose=1)
-    saveResult(test_predict,results,testName)
+    test_imgs_name, test_imgs_path = testFileName(test_img,'.jpg')
+    batch_size = 1000
+    for i in range(0, len(test_imgs_name)-batch_size+1, batch_size):
+        testGene = testGeneratorMine(test_imgs_path[i:i+batch_size],'.jpg')
+        results = model.predict_generator(testGene,batch_size,verbose=1)
+        saveResult(test_predict,results,test_imgs_name[i:i+batch_size])
+    testGene = testGeneratorMine(test_imgs_path[len(test_imgs_name)-batch_size:],'.jpg')
+    results = model.predict_generator(testGene,batch_size,verbose=1)
+    saveResult(test_predict,results,test_imgs_name[len(test_imgs_name)-batch_size:])
     
     test_img = 'C:\\_ERIC\\_datasets\\dataset_v10.1\\right'
     test_predict = 'C:\\_ERIC\\_datasets\\dataset_v11\\right'
     model = load_model(model_path)
-    testGene = testGenerator(test_img,'.jpg')
-    testName = testFileName(test_img,'.jpg')
-    results = model.predict_generator(testGene,len(testName),verbose=1)
-    saveResult(test_predict,results,testName)
+    test_imgs_name, test_imgs_path = testFileName(test_img,'.jpg')
+    batch_size = 1000
+    for i in range(0, len(test_imgs_name)-batch_size+1, batch_size):
+        testGene = testGeneratorMine(test_imgs_path[i:i+batch_size],'.jpg')
+        results = model.predict_generator(testGene,batch_size,verbose=1)
+        saveResult(test_predict,results,test_imgs_name[i:i+batch_size])
+    testGene = testGeneratorMine(test_imgs_path[len(test_imgs_name)-batch_size:],'.jpg')
+    results = model.predict_generator(testGene,batch_size,verbose=1)
+    saveResult(test_predict,results,test_imgs_name[len(test_imgs_name)-batch_size:])

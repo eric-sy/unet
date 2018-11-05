@@ -100,7 +100,7 @@ def trainGenerator(batch_size,train_path,image_folder,mask_folder,aug_dict,image
 
 
 
-def testGenerator(test_path,suffix, resize= False, target_size = (256,256),flag_multi_class = False, as_gray = True):
+def testGenerator(test_path, suffix, resize= False, target_size = (256,256),flag_multi_class = False, as_gray = True):
     for each in sorted(os.listdir(test_path)):
         if suffix in each:
             img = io.imread(os.path.join(test_path,each),as_gray = as_gray)
@@ -111,12 +111,23 @@ def testGenerator(test_path,suffix, resize= False, target_size = (256,256),flag_
             img = np.reshape(img,(1,)+img.shape)
             yield img
 
+def testGeneratorMine(test_path, suffix, resize= False, target_size = (256,256),flag_multi_class = False, as_gray = True):
+    for each in test_path:    
+        img = io.imread(each,as_gray = as_gray)
+        if resize:
+            img = trans.resize(img,target_size,mode='constant')
+        img = np.reshape(img,img.shape+(1,)) if (not flag_multi_class) else img
+        img = np.reshape(img,(1,)+img.shape)
+        yield img
+            
 def testFileName(test_path,suffix):
     name_list = []
+    path_list = []
     for each in sorted(os.listdir(test_path)):
         if suffix in each:
             name_list.append(each)
-    return name_list       
+            path_list.append(os.path.join(test_path,each))
+    return name_list,path_list       
 
 
 def labelVisualize(num_class,color_dict,img):
