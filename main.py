@@ -29,7 +29,7 @@ if False:
     model_checkpoint = ModelCheckpoint(model_path, monitor='loss',verbose=1, save_best_only=True)
     model.fit_generator(myGene,steps_per_epoch=300,epochs=5,callbacks=[model_checkpoint])
 
-
+ 
 if True:  
     test_img = 'C:\\_ERIC\\_datasets\\dataset_v10.1\\left'
     test_predict = 'C:\\_ERIC\\_datasets\\dataset_v11\\left'
