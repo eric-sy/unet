@@ -5,18 +5,18 @@ import warnings
 from numpy.distutils.tests.test_fcompiler_nagfor import TestNagFCompilerVersions
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-#os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-
 #train_base = 'data/membrane/train'
 #test_base = 'data/membrane/test'
 
 train_base = 'C:\\_ERIC\\_datasets\\vessels\\train'
-model_path = 'C:\\_ERIC\\_datasets\\vessels\\unet_vessels_m1.hdf5'
+model_path = 'C:\\_ERIC\\_datasets\\vessels\\unet_vessels.hdf5'
 test_img = 'C:\\_ERIC\\_datasets\\vessels\\test\\image'
 test_predict = 'C:\\_ERIC\\_datasets\\vessels\\test\\predict'
 
+TRAINING_FLAG=False
+TEST_FLAG=True
 
-if False:
+if TRAINING_FLAG:
     data_gen_args = dict(rotation_range=0.2,
                         width_shift_range=0.05,
                         height_shift_range=0.05,
@@ -30,8 +30,7 @@ if False:
     model_checkpoint = ModelCheckpoint(model_path, monitor='loss',verbose=1, save_best_only=True)
     model.fit_generator(myGene,steps_per_epoch=300,epochs=5,callbacks=[model_checkpoint])
 
-   
-if True:  
+if TEST_FLAG:  
     test_img = 'C:\\_ERIC\\_datasets\\dataset_v10.1\\left'
     test_predict = 'C:\\_ERIC\\_datasets\\dataset_v11\\left'
     model = load_model(model_path)
