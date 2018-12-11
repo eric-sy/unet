@@ -1,5 +1,5 @@
 from __future__ import print_function
-from keras.ImageProcessing.image import ImageDataGenerator
+from keras.preprocessing.image import ImageDataGenerator
 import numpy as np 
 import os
 import glob
