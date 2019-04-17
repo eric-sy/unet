@@ -30,7 +30,6 @@ def unet(pretrained_weights = None,input_size = (256,256,1)):
     conv5 = Conv2D(1024, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv5)
     drop5 = Dropout(0.5)(conv5)
 
-
     up6 = Conv2D(512, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(drop5))
     # Try up6=Conv2DTranspose(512, 2, strides=(2,2), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')
     concatenate6 = concatenate([drop4,up6], axis = 3)
@@ -61,7 +60,7 @@ def unet(pretrained_weights = None,input_size = (256,256,1)):
     #model.summary()
 
     if(pretrained_weights):
-        model.load_weights(pretrained_weights)
+    	model.load_weights(pretrained_weights)
 
     return model
 
