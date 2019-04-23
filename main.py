@@ -1,8 +1,10 @@
-from model import *
-from data import *
-from itertools import tee
 import warnings
-from numpy.distutils.tests.test_fcompiler_nagfor import TestNagFCompilerVersions
+
+from keras.callbacks import ModelCheckpoint
+
+from data import *
+from model import *
+
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 #train_base = 'data/membrane/train'
