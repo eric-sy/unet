@@ -20,6 +20,7 @@ def train():
                          zoom_range=0.05,
                          horizontal_flip=True,
                          fill_mode='nearest')
+
     myGene = trainGenerator(2, train_base, 'image_2', 'label_2', data_gen_args, target_size=(320, 320))
 
     model = unet(input_size=(320, 320, 1))
