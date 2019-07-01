@@ -43,6 +43,6 @@ def eval(test_img,test_predict):
     
 
 if __name__ == "__main__":
-#     train()
-    eval(test_img = 'C:\\_ERIC\\_datasets\\dataset_v10.2\\left', test_predict = 'C:\\_ERIC\\_datasets\\dataset_v12')
-    eval(test_img = 'C:\\_ERIC\\_datasets\\dataset_v10.2\\right', test_predict = 'C:\\_ERIC\\_datasets\\dataset_v12')
+    train()
+#     eval(test_img = 'C:\\_ERIC\\_datasets\\dataset_v10.2\\left', test_predict = 'C:\\_ERIC\\_datasets\\dataset_v12')
+#     eval(test_img = 'C:\\_ERIC\\_datasets\\dataset_v10.2\\right', test_predict = 'C:\\_ERIC\\_datasets\\dataset_v12')
