@@ -1,13 +1,6 @@
-import numpy as np
-import os
-import skimage.io as io
-import skimage.transform as trans
-import numpy as np
-from keras.models import *
 from keras.layers import *
+from keras.models import *
 from keras.optimizers import *
-from keras.callbacks import ModelCheckpoint, LearningRateScheduler
-from keras import backend as keras
 
 
 def unet(pretrained_weights=None, input_size=(256, 256, 1)):
@@ -31,6 +24,7 @@ def unet(pretrained_weights=None, input_size=(256, 256, 1)):
     drop5 = Dropout(0.5)(conv5)
 
     up6 = Conv2D(512, 2, activation='relu', padding='same', kernel_initializer='he_normal')(UpSampling2D(size=(2, 2))(drop5))
+    # Try up6=Conv2DTranspose(512, 2, strides=(2,2), activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')
     concatenate6 = concatenate([drop4, up6], axis=3)
     conv6 = Conv2D(512, 3, activation='relu', padding='same', kernel_initializer='he_normal')(concatenate6)
     conv6 = Conv2D(512, 3, activation='relu', padding='same', kernel_initializer='he_normal')(conv6)
