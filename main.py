@@ -8,10 +8,6 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 # train_base = 'data/membrane/train'
 # test_base = 'data/membrane/test'
 
-train_base = 'C:\\_ERIC\\_datasets\\discs\\train'
-model_path = 'C:\\_ERIC\\_datasets\\discs\\unet_discs.hdf5'
-
-
 def train():
     data_gen_args = dict(rotation_range=0.2,
                          width_shift_range=0.05,
@@ -46,6 +42,9 @@ def eval(test_img, test_predict):
 
 
 if __name__ == "__main__":
+    train_base = 'C:\\_ERIC\\_datasets\\discs\\train'
+    model_path = 'C:\\_ERIC\\_datasets\\discs\\unet_discs.hdf5'
+
     #     train()
     eval(test_img='C:\\_ERIC\\_datasets\\dataset_v10.2\\left', test_predict='C:\\_ERIC\\_datasets\\dataset_v12')
     eval(test_img='C:\\_ERIC\\_datasets\\dataset_v10.2\\right', test_predict='C:\\_ERIC\\_datasets\\dataset_v12')
